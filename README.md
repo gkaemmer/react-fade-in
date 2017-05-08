@@ -1,5 +1,6 @@
 # react-fade-in
 Dead-simple and opinionated component to fade in an element's children.
+
 ![React Fade In](/example/example.gif)
 
 ## Installation
