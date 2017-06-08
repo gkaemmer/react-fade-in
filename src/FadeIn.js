@@ -7,6 +7,7 @@ export default class FadeIn extends Component {
 
   componentDidMount() {
     const count = React.Children.count(this.props.children);
+    var customLag = this.props.lag ? parseInt(this.props.lag) : 50;
     let i = 0;
     this.interval = setInterval(() => {
       i++;
@@ -14,7 +15,7 @@ export default class FadeIn extends Component {
         clearInterval(this.interval);
 
       this.setState({ maxIsVisible: i });
-    }, 50);
+    }, customLag);
   }
 
   render() {
