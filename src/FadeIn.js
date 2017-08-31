@@ -7,6 +7,7 @@ export default class FadeIn extends Component {
 
   componentDidMount() {
     const count = React.Children.count(this.props.children);
+    var customLag = parseInt(this.props.lag) ? parseInt(this.props.lag) : 50;
     let i = 0;
     this.interval = setInterval(() => {
       i++;
@@ -14,7 +15,7 @@ export default class FadeIn extends Component {
         clearInterval(this.interval);
 
       this.setState({ maxIsVisible: i });
-    }, 50);
+    }, customLag);
   }
 
   componentWillUnmount() {
@@ -23,6 +24,7 @@ export default class FadeIn extends Component {
   
   render() {
     const duration = 0.4;
+    const delay = this.props.delay;
     return (
       <div>
         {React.Children.map(this.props.children, (child, i) => {
@@ -30,6 +32,7 @@ export default class FadeIn extends Component {
             <div
               style={{
                 transition: `opacity ${duration}s, top ${duration}s`,
+                'transition-delay': delay,
                 position: "relative",
                 top: this.state.maxIsVisible > i ? 0 : 20,
                 opacity: this.state.maxIsVisible > i ? 1 : 0
