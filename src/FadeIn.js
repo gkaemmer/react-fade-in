@@ -17,6 +17,10 @@ export default class FadeIn extends Component {
     }, 50);
   }
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+  
   render() {
     const duration = 0.4;
     return (
