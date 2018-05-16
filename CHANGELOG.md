@@ -1,5 +1,11 @@
 ### v0.0.1
-- Initial version
+
+*   Initial version
 
 ### v0.1.5
-- Prevent `setState` on unmounted `Fade` component. (thanks to @Themandunord)
+
+*   Prevent `setState` on unmounted `Fade` component. (thanks to @Themandunord)
+
+### v0.1.6
+
+*   Added `delay` and `transitionDuration` props.
