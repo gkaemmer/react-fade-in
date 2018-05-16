@@ -1,4 +1,5 @@
 # react-fade-in
+
 Dead-simple and opinionated component to fade in an element's children.
 
 ![React Fade In](/example/example.gif)
@@ -9,7 +10,7 @@ Dead-simple and opinionated component to fade in an element's children.
 
 ## Usage
 
-`react-fade-in` 
+`react-fade-in`
 
 ```
 import FadeIn from 'react-fade-in';
@@ -27,6 +28,14 @@ import FadeIn from 'react-fade-in';
 ## API
 
 ### `FadeIn`
-Animates its children, one by one. Takes no props. To have things animate at different times, they must be first-level children of the `<FadeIn>` component (i.e. members of `props.children`).
+
+Animates its children, one by one.
+
+> **Note**: To have children animate separately, they must be first-level children of the `<FadeIn>` component (i.e. members of its `props.children`).
+
+#### Props
+
+*   `delay`: Default: 50. Delay between each child's animation in milliseconds.
+*   `transitionDuration`: Default: 400. Duration of each child's animation in milliseconds.
 
 Happy fading.
