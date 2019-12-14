@@ -31,7 +31,7 @@ export default class FadeIn extends Component {
   render() {
     const transitionDuration = this.transitionDuration;
     return (
-      <div>
+      <div className={this.props.className}>
         {React.Children.map(this.props.children, (child, i) => {
           return (
             <div
