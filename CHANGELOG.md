@@ -9,3 +9,7 @@
 ### v0.1.6
 
 *   Added `delay` and `transitionDuration` props.
+
+### v0.1.7
+
+*   Pass `className` prop through to container element. (thanks to @Deveosys)
