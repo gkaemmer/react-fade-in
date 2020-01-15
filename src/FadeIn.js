@@ -35,6 +35,7 @@ export default class FadeIn extends Component {
         {React.Children.map(this.props.children, (child, i) => {
           return (
             <div
+              className={this.props.itemClassName}
               style={{
                 transition: `opacity ${transitionDuration}ms, top ${transitionDuration}ms`,
                 position: "relative",
