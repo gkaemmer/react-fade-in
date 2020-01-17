@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 
 export default class FadeIn extends Component {
-  state = {
-    maxIsVisible: 0
-  };
+  constructor() {
+    super();
+    this.state = {
+      maxIsVisible: 0
+    };
+  }
 
   get delay() {
     return this.props.delay || 50;
