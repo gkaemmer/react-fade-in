@@ -1,52 +1,40 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var path = require('path');
+var webpack = require("webpack");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var path = require("path");
 var env = process.env.NODE_ENV;
 var isExample = process.env.EXAMPLE;
 
 var config = {
-  entry: {
-    'react-appear': path.join(__dirname, 'src', 'index.js')
-  },
+  entry: path.join(__dirname, "src", "index.js"),
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].js'
+    path: path.join(__dirname, "dist"),
+    filename: "[name].js"
   },
   module: {
-    loaders: [
-      { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ }
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: "babel-loader"
+      }
     ]
   },
-  plugins: [
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(env)
-    })
-  ]
+  plugins: [new webpack.EnvironmentPlugin(["NODE_ENV"])]
 };
 
-if (env === 'production') {
-  config.plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  )
+if (env === "production") {
+  config.mode = "production";
 }
 
 if (isExample) {
   // Build example
-  config.entry = {
-    index: path.join(__dirname, 'example', 'client.js')
-  };
-  config.output.path = path.join(__dirname, 'example', 'public');
+  config.entry = path.join(__dirname, "example", "client.js");
+  config.output.path = path.join(__dirname, "example", "public");
   config.plugins.push(
     new HtmlWebpackPlugin({
-      template: './example/index.html'
+      template: "./example/index.html"
     })
   );
 }
 
-
-module.exports = config
+module.exports = config;

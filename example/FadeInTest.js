@@ -40,6 +40,23 @@ export default class FadeInTest extends Component {
           <Element>Element 5</Element>
           <Element>Element 6</Element>
         </FadeIn>
+        <Title>With Class names</Title>
+        <FadeIn className="container" childClassName="child">
+          <Element>Element 1</Element>
+          <Element>Element 2</Element>
+          <Element>Element 3</Element>
+          <Element>Element 4</Element>
+          <Element>Element 5</Element>
+          <Element>Element 6</Element>
+        </FadeIn>
+        <style>{`
+          .container {
+            border: 1px solid blue;
+          }
+          .child {
+            color: red;
+          }
+        `}</style>
       </Container>
     );
   }
