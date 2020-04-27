@@ -17,3 +17,7 @@
 ### v0.1.8
 
 *   Add `childClassName` prop to allow styling for child divs. (thanks to @Deveosys)
+
+### v1.0.0
+
+*   Use `transform: translateY(...)` instead of `position: relative` and `top` to animate elements. This is a breaking change if you rely on `position: relative` on the child divs. Thanks to [@bogdansoare](https://github.com/gkaemmer/react-fade-in/issues/8) for the suggestion.
