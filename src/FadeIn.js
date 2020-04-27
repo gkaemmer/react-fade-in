@@ -40,9 +40,8 @@ export default class FadeIn extends Component {
             <div
               className={this.props.childClassName}
               style={{
-                transition: `opacity ${transitionDuration}ms, top ${transitionDuration}ms`,
-                position: "relative",
-                top: this.state.maxIsVisible > i ? 0 : 20,
+                transition: `opacity ${transitionDuration}ms, transform ${transitionDuration}ms`,
+                transform: `translateY(${this.state.maxIsVisible > i ? 0 : 20}px)`,
                 opacity: this.state.maxIsVisible > i ? 1 : 0
               }}
             >
