@@ -33,8 +33,10 @@ export default class FadeIn extends Component {
 
   render() {
     const transitionDuration = this.transitionDuration;
+    const WrapperTag = this.props.wrapperTag || "div";
+
     return (
-      <div className={this.props.className}>
+      <WrapperTag className={this.props.className}>
         {React.Children.map(this.props.children, (child, i) => {
           return (
             <div
@@ -49,7 +51,7 @@ export default class FadeIn extends Component {
             </div>
           );
         })}
-      </div>
+      </WrapperTag>
     );
   }
 }
