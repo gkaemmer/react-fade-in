@@ -34,12 +34,13 @@ export default class FadeIn extends Component {
   render() {
     const transitionDuration = this.transitionDuration;
     const WrapperTag = this.props.wrapperTag || "div";
+    const ChildTag = this.props.childTag || "div";
 
     return (
       <WrapperTag className={this.props.className}>
         {React.Children.map(this.props.children, (child, i) => {
           return (
-            <div
+            <ChildTag
               className={this.props.childClassName}
               style={{
                 transition: `opacity ${transitionDuration}ms, transform ${transitionDuration}ms`,
@@ -48,7 +49,7 @@ export default class FadeIn extends Component {
               }}
             >
               {child}
-            </div>
+            </ChildTag>
           );
         })}
       </WrapperTag>
