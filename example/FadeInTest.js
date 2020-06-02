@@ -49,6 +49,24 @@ export default class FadeInTest extends Component {
           <Element>Element 5</Element>
           <Element>Element 6</Element>
         </FadeIn>
+        <Title>With Custom Wrapper Tag (&lt;section&gt;)</Title>
+        <FadeIn wrapperTag="section">
+          <Element>Element 1</Element>
+          <Element>Element 2</Element>
+          <Element>Element 3</Element>
+          <Element>Element 4</Element>
+          <Element>Element 5</Element>
+          <Element>Element 6</Element>
+        </FadeIn>
+        <Title>With Custom Child Tag (&lt;section&gt;)</Title>
+        <FadeIn childTag="section">
+          <Element>Element 1</Element>
+          <Element>Element 2</Element>
+          <Element>Element 3</Element>
+          <Element>Element 4</Element>
+          <Element>Element 5</Element>
+          <Element>Element 6</Element>
+        </FadeIn>
         <style>{`
           .container {
             border: 1px solid blue;
