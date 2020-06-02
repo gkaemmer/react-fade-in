@@ -39,5 +39,7 @@ Animates its children, one by one.
 *   `transitionDuration`: Default: 400. Duration of each child's animation in milliseconds.
 *   `className`: No default. Adds a `className` prop to the container div.
 *   `childClassName`: No default. Adds a `className` prop to each child div, allowing you to style the direct children of the `FadeIn` component.
+*   `wrapperTag`: Default: `"div"`. Override the HTML element of the wrapping div.
+*   `childTag`: Default: `"div"`. Override the HTML element wrapped around each child element.
 
 Happy fading.

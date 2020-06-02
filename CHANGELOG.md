@@ -21,3 +21,7 @@
 ### v1.0.0
 
 *   Use `transform: translateY(...)` instead of `position: relative` and `top` to animate elements. This is a breaking change if you rely on `position: relative` on the child divs. Thanks to [@bogdansoare](https://github.com/gkaemmer/react-fade-in/issues/8) for the suggestion.
+
+### v1.1.0
+
+*   Add `wrapperTag` and `childTag` props. Thanks to [@domarp-j](https://github.com/domarp-j).
