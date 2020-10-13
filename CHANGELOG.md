@@ -25,3 +25,7 @@
 ### v1.1.0
 
 *   Add `wrapperTag` and `childTag` props. Thanks to [@domarp-j](https://github.com/domarp-j).
+
+### v1.1.1
+
+*   Transition to `transform: none` instead of `transform: translateY(0)`. Thanks to [@atnpcg](https://github.com/atnpcg).
