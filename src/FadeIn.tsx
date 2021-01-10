@@ -1,4 +1,10 @@
-import React, { Component, JSXElementConstructor } from "react";
+import React, {
+  Component,
+  JSXElementConstructor,
+  PropsWithChildren,
+  useEffect,
+  useState,
+} from "react";
 
 interface Props {
   delay?: number;
@@ -7,63 +13,59 @@ interface Props {
   childTag: JSXElementConstructor<any>;
   className: string;
   childClassName: string;
+  out?: boolean;
+  onComplete?: () => any;
 }
 
-export default class FadeIn extends Component<Props, { maxIsVisible: number }> {
-  interval: any;
+export default function FadeIn(props: PropsWithChildren<Props>) {
+  const [maxIsVisible, setMaxIsVisible] = useState(0);
+  const transitionDuration = props.transitionDuration || 400;
+  const delay = props.delay || 50;
+  const WrapperTag = props.wrapperTag || "div";
+  const ChildTag = props.childTag || "div";
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      maxIsVisible: 0
-    };
-  }
+  useEffect(() => {
+    let count = React.Children.count(props.children);
+    if (props.out) {
+      // Animate all children out
+      count = 0;
+    }
+    if (count == maxIsVisible) {
+      const timeout = setTimeout(() => {
+        if (props.onComplete) props.onComplete();
+      }, transitionDuration);
+      return () => clearTimeout(timeout);
+    }
 
-  get delay() {
-    return this.props.delay || 50;
-  }
+    const interval = count > maxIsVisible ? 1 : -1;
+    const timeout = setTimeout(() => {
+      setMaxIsVisible(maxIsVisible + interval);
+    }, delay);
+    return () => clearTimeout(timeout);
+  }, [
+    React.Children.count(props.children),
+    delay,
+    maxIsVisible,
+    props.out,
+    transitionDuration,
+  ]);
 
-  get transitionDuration() {
-    return this.props.transitionDuration || 400;
-  }
-
-  componentDidMount() {
-    const count = React.Children.count(this.props.children);
-    let i = 0;
-    this.interval = setInterval(() => {
-      i++;
-      if (i > count) clearInterval(this.interval);
-
-      this.setState({ maxIsVisible: i });
-    }, this.delay);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
-  render() {
-    const transitionDuration = this.transitionDuration;
-    const WrapperTag = this.props.wrapperTag || "div";
-    const ChildTag = this.props.childTag || "div";
-
-    return (
-      <WrapperTag className={this.props.className}>
-        {React.Children.map(this.props.children, (child, i) => {
-          return (
-            <ChildTag
-              className={this.props.childClassName}
-              style={{
-                transition: `opacity ${transitionDuration}ms, transform ${transitionDuration}ms`,
-                transform: this.state.maxIsVisible > i ? 'none' : 'translateY(20px)',
-                opacity: this.state.maxIsVisible > i ? 1 : 0
-              }}
-            >
-              {child}
-            </ChildTag>
-          );
-        })}
-      </WrapperTag>
-    );
-  }
+  return (
+    <WrapperTag className={props.className}>
+      {React.Children.map(props.children, (child, i) => {
+        return (
+          <ChildTag
+            className={props.childClassName}
+            style={{
+              transition: `opacity ${transitionDuration}ms, transform ${transitionDuration}ms`,
+              transform: maxIsVisible > i ? "none" : "translateY(20px)",
+              opacity: maxIsVisible > i ? 1 : 0,
+            }}
+          >
+            {child}
+          </ChildTag>
+        );
+      })}
+    </WrapperTag>
+  );
 }

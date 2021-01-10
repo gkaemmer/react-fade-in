@@ -20,6 +20,7 @@ const Element = styled.div`
 
 export default function FadeInTest() {
   const [childCount, setChildCount] = useState(6);
+  const [removeAll, setRemoveAll] = useState(false);
   return (
     <Container>
       <button onClick={() => setChildCount(childCount + 1)}>Add child</button>
@@ -28,32 +29,35 @@ export default function FadeInTest() {
       >
         Remove child
       </button>
+      <button onClick={() => setRemoveAll(!removeAll)}>
+        Set out = {(!removeAll).toString()}
+      </button>
       <Title>React Fade-In</Title>
-      <FadeIn>
+      <FadeIn out={removeAll} onComplete={() => console.log("onComplete")}>
         {[...Array(childCount).keys()].map((i) => (
           <Element>Element {i + 1}</Element>
         ))}
       </FadeIn>
       <Title>With Delay</Title>
-      <FadeIn delay={300} transitionDuration={700}>
+      <FadeIn out={removeAll} delay={300} transitionDuration={700}>
         {[...Array(childCount).keys()].map((i) => (
           <Element>Element {i + 1}</Element>
         ))}
       </FadeIn>
       <Title>With Class names</Title>
-      <FadeIn className="container" childClassName="child">
+      <FadeIn out={removeAll} className="container" childClassName="child">
         {[...Array(childCount).keys()].map((i) => (
           <Element>Element {i + 1}</Element>
         ))}
       </FadeIn>
       <Title>With Custom Wrapper Tag (&lt;section&gt;)</Title>
-      <FadeIn wrapperTag="section">
+      <FadeIn out={removeAll} wrapperTag="section">
         {[...Array(childCount).keys()].map((i) => (
           <Element>Element {i + 1}</Element>
         ))}
       </FadeIn>
       <Title>With Custom Child Tag (&lt;section&gt;)</Title>
-      <FadeIn childTag="section">
+      <FadeIn out={removeAll} childTag="section">
         {[...Array(childCount).keys()].map((i) => (
           <Element>Element {i + 1}</Element>
         ))}
