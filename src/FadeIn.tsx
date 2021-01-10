@@ -1,5 +1,4 @@
 import React, {
-  Component,
   JSXElementConstructor,
   PropsWithChildren,
   useEffect,

@@ -3,6 +3,7 @@
   "version": "1.1.1",
   "description": "Super-easy fade-in animation for react children",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "repository": {
     "url": "git@github.com:gkaemmer/react-fade-in.git",
     "type": "git"
@@ -12,7 +13,9 @@
     "build:clean": "rm -rf lib",
     "build:lib": "tsc",
     "prepublish": "NODE_ENV=production npm run build",
-    "start": "EXAMPLE=true webpack-dev-server --port 3124 --hot --inline --content-base example/public"
+    "dev:server": "EXAMPLE=true webpack-dev-server --port 3124 --hot --inline --content-base example/public",
+    "dev:compile": "tsc --watch",
+    "dev": "npm run dev:server"
   },
   "author": "Graham Kaemmer",
   "license": "MIT",
@@ -34,6 +37,6 @@
     "webpack-dev-server": "^3.10.1"
   },
   "peerDependencies": {
-    "react": "15 || 16"
+    "react": "^16.8 || 17"
   }
 }
