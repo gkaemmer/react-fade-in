@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import FadeIn from "../lib";
 import styled from "styled-components";
 
@@ -18,56 +18,47 @@ const Element = styled.div`
   line-height: 1.5em;
 `;
 
-export default class FadeInTest extends Component {
-  render() {
-    return (
-      <Container>
-        <Title>React Fade-In</Title>
-        <FadeIn>
-          <Element>Element 1</Element>
-          <Element>Element 2</Element>
-          <Element>Element 3</Element>
-          <Element>Element 4</Element>
-          <Element>Element 5</Element>
-          <Element>Element 6</Element>
-        </FadeIn>
-        <Title>With Delay</Title>
-        <FadeIn delay={300} transitionDuration={700}>
-          <Element>Element 1</Element>
-          <Element>Element 2</Element>
-          <Element>Element 3</Element>
-          <Element>Element 4</Element>
-          <Element>Element 5</Element>
-          <Element>Element 6</Element>
-        </FadeIn>
-        <Title>With Class names</Title>
-        <FadeIn className="container" childClassName="child">
-          <Element>Element 1</Element>
-          <Element>Element 2</Element>
-          <Element>Element 3</Element>
-          <Element>Element 4</Element>
-          <Element>Element 5</Element>
-          <Element>Element 6</Element>
-        </FadeIn>
-        <Title>With Custom Wrapper Tag (&lt;section&gt;)</Title>
-        <FadeIn wrapperTag="section">
-          <Element>Element 1</Element>
-          <Element>Element 2</Element>
-          <Element>Element 3</Element>
-          <Element>Element 4</Element>
-          <Element>Element 5</Element>
-          <Element>Element 6</Element>
-        </FadeIn>
-        <Title>With Custom Child Tag (&lt;section&gt;)</Title>
-        <FadeIn childTag="section">
-          <Element>Element 1</Element>
-          <Element>Element 2</Element>
-          <Element>Element 3</Element>
-          <Element>Element 4</Element>
-          <Element>Element 5</Element>
-          <Element>Element 6</Element>
-        </FadeIn>
-        <style>{`
+export default function FadeInTest() {
+  const [childCount, setChildCount] = useState(6);
+  return (
+    <Container>
+      <button onClick={() => setChildCount(childCount + 1)}>Add child</button>
+      <button
+        onClick={() => (childCount > 1 ? setChildCount(childCount - 1) : null)}
+      >
+        Remove child
+      </button>
+      <Title>React Fade-In</Title>
+      <FadeIn>
+        {[...Array(childCount).keys()].map((i) => (
+          <Element>Element {i + 1}</Element>
+        ))}
+      </FadeIn>
+      <Title>With Delay</Title>
+      <FadeIn delay={300} transitionDuration={700}>
+        {[...Array(childCount).keys()].map((i) => (
+          <Element>Element {i + 1}</Element>
+        ))}
+      </FadeIn>
+      <Title>With Class names</Title>
+      <FadeIn className="container" childClassName="child">
+        {[...Array(childCount).keys()].map((i) => (
+          <Element>Element {i + 1}</Element>
+        ))}
+      </FadeIn>
+      <Title>With Custom Wrapper Tag (&lt;section&gt;)</Title>
+      <FadeIn wrapperTag="section">
+        {[...Array(childCount).keys()].map((i) => (
+          <Element>Element {i + 1}</Element>
+        ))}
+      </FadeIn>
+      <Title>With Custom Child Tag (&lt;section&gt;)</Title>
+      <FadeIn childTag="section">
+        {[...Array(childCount).keys()].map((i) => (
+          <Element>Element {i + 1}</Element>
+        ))}
+      </FadeIn>
+      <style>{`
           .container {
             border: 1px solid blue;
           }
@@ -75,7 +66,6 @@ export default class FadeInTest extends Component {
             color: red;
           }
         `}</style>
-      </Container>
-    );
-  }
+    </Container>
+  );
 }
