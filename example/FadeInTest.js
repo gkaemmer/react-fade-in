@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import FadeIn from "../src/index";
+import FadeIn from "../lib";
 import styled from "styled-components";
 
 const Container = styled.div`

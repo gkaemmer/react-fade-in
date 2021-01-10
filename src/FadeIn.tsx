@@ -1,8 +1,19 @@
-import React, { Component } from "react";
+import React, { Component, JSXElementConstructor } from "react";
 
-export default class FadeIn extends Component {
-  constructor() {
-    super();
+interface Props {
+  delay?: number;
+  transitionDuration?: number;
+  wrapperTag: JSXElementConstructor<any>;
+  childTag: JSXElementConstructor<any>;
+  className: string;
+  childClassName: string;
+}
+
+export default class FadeIn extends Component<Props, { maxIsVisible: number }> {
+  interval: any;
+
+  constructor(props: Props) {
+    super(props);
     this.state = {
       maxIsVisible: 0
     };
