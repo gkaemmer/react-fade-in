@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FadeIn from "../lib";
 import styled from "styled-components";
 
@@ -18,9 +18,18 @@ const Element = styled.div`
   line-height: 1.5em;
 `;
 
+function DynamicChild({ start }) {
+  const [count, setCount] = useState(start);
+  useEffect(() => {
+    const timeout = setTimeout(() => setCount(count + 1), 100);
+    return () => clearTimeout(timeout);
+  }, [count]);
+  return <div>Count: {count}</div>;
+}
+
 export default function FadeInTest() {
   const [childCount, setChildCount] = useState(6);
-  const [removeAll, setRemoveAll] = useState(false);
+  const [visible, setVisible] = useState(true);
   return (
     <Container>
       <button onClick={() => setChildCount(childCount + 1)}>Add child</button>
@@ -29,35 +38,47 @@ export default function FadeInTest() {
       >
         Remove child
       </button>
-      <button onClick={() => setRemoveAll(!removeAll)}>
-        Set out = {(!removeAll).toString()}
-      </button>
       <Title>React Fade-In</Title>
-      <FadeIn out={removeAll} onComplete={() => console.log("onComplete")}>
+      <FadeIn onComplete={() => console.log("onComplete")}>
         {[...Array(childCount).keys()].map((i) => (
           <Element>Element {i + 1}</Element>
         ))}
       </FadeIn>
+      <Title>With `visible` prop</Title>
+      <button onClick={() => setVisible(!visible)}>
+        Set visible = {(!visible).toString()}
+      </button>
+      <FadeIn visible={visible} onComplete={() => console.log("onComplete")}>
+        {[...Array(childCount).keys()].map((i) => (
+          <Element>Element {i + 1}</Element>
+        ))}
+      </FadeIn>
+      <Title>With dynamic child</Title>
+      <FadeIn delay={300} transitionDuration={700}>
+        {[...Array(childCount).keys()].map((i) => (
+          <DynamicChild start={i * 1000} />
+        ))}
+      </FadeIn>
       <Title>With Delay</Title>
-      <FadeIn out={removeAll} delay={300} transitionDuration={700}>
+      <FadeIn delay={300} transitionDuration={700}>
         {[...Array(childCount).keys()].map((i) => (
           <Element>Element {i + 1}</Element>
         ))}
       </FadeIn>
       <Title>With Class names</Title>
-      <FadeIn out={removeAll} className="container" childClassName="child">
+      <FadeIn className="container" childClassName="child">
         {[...Array(childCount).keys()].map((i) => (
           <Element>Element {i + 1}</Element>
         ))}
       </FadeIn>
       <Title>With Custom Wrapper Tag (&lt;section&gt;)</Title>
-      <FadeIn out={removeAll} wrapperTag="section">
+      <FadeIn wrapperTag="section">
         {[...Array(childCount).keys()].map((i) => (
           <Element>Element {i + 1}</Element>
         ))}
       </FadeIn>
       <Title>With Custom Child Tag (&lt;section&gt;)</Title>
-      <FadeIn out={removeAll} childTag="section">
+      <FadeIn childTag="section">
         {[...Array(childCount).keys()].map((i) => (
           <Element>Element {i + 1}</Element>
         ))}

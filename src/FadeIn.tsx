@@ -13,7 +13,7 @@ interface Props {
   childTag: JSXElementConstructor<any>;
   className: string;
   childClassName: string;
-  out?: boolean;
+  visible?: boolean;
   onComplete?: () => any;
 }
 
@@ -23,30 +23,34 @@ export default function FadeIn(props: PropsWithChildren<Props>) {
   const delay = props.delay || 50;
   const WrapperTag = props.wrapperTag || "div";
   const ChildTag = props.childTag || "div";
+  const visible = typeof props.visible === "undefined" ? true : props.visible;
 
   useEffect(() => {
     let count = React.Children.count(props.children);
-    if (props.out) {
+    if (!visible) {
       // Animate all children out
       count = 0;
     }
+
     if (count == maxIsVisible) {
+      // We're done updating maxVisible, notify when animation is done
       const timeout = setTimeout(() => {
         if (props.onComplete) props.onComplete();
       }, transitionDuration);
       return () => clearTimeout(timeout);
     }
 
-    const interval = count > maxIsVisible ? 1 : -1;
+    // Move maxIsVisible toward count
+    const increment = count > maxIsVisible ? 1 : -1;
     const timeout = setTimeout(() => {
-      setMaxIsVisible(maxIsVisible + interval);
+      setMaxIsVisible(maxIsVisible + increment);
     }, delay);
     return () => clearTimeout(timeout);
   }, [
     React.Children.count(props.children),
     delay,
     maxIsVisible,
-    props.out,
+    visible,
     transitionDuration,
   ]);
 
