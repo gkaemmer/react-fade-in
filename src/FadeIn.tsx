@@ -8,10 +8,10 @@ import React, {
 interface Props {
   delay?: number;
   transitionDuration?: number;
-  wrapperTag: JSXElementConstructor<any>;
-  childTag: JSXElementConstructor<any>;
-  className: string;
-  childClassName: string;
+  wrapperTag?: JSXElementConstructor<any>;
+  childTag?: JSXElementConstructor<any>;
+  className?: string;
+  childClassName?: string;
   visible?: boolean;
   onComplete?: () => any;
 }

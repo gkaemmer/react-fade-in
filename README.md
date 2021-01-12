@@ -35,11 +35,13 @@ Animates its children, one by one.
 
 #### Props
 
-*   `delay`: Default: 50. Delay between each child's animation in milliseconds.
-*   `transitionDuration`: Default: 400. Duration of each child's animation in milliseconds.
-*   `className`: No default. Adds a `className` prop to the container div.
-*   `childClassName`: No default. Adds a `className` prop to each child div, allowing you to style the direct children of the `FadeIn` component.
-*   `wrapperTag`: Default: `"div"`. Override the HTML element of the wrapping div.
-*   `childTag`: Default: `"div"`. Override the HTML element wrapped around each child element.
+- `delay`: Default: 50. Delay between each child's animation in milliseconds.
+- `transitionDuration`: Default: 400. Duration of each child's animation in milliseconds.
+- `className`: No default. Adds a `className` prop to the container div.
+- `childClassName`: No default. Adds a `className` prop to each child div, allowing you to style the direct children of the `FadeIn` component.
+- `wrapperTag`: Default: `"div"`. Override the HTML element of the wrapping div.
+- `childTag`: Default: `"div"`. Override the HTML element wrapped around each child element.
+- `visible`: **New in 2.0.0**: If not `undefined`, the `visible` prop can be used to control when the fade in occurs. If set to `false` after the fade-in animation completes, the children will fade out one by one.
+- `onComplete`: **New in 2.0.0**: specifies a callback to be called when the animation completes.
 
 Happy fading.
