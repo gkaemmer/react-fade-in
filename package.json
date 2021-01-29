@@ -1,6 +1,6 @@
 {
   "name": "react-fade-in",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Super-easy fade-in animation for react children",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
